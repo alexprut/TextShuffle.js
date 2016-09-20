@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>TextShuffle.js Demo</title>
+    <style>
+        #demo {
+            font-family: monospace;
+            padding: 50px;
+            font-size: 40px;
+        }
+    </style>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../textShuffle.js"></script>
     <script src="../jquery.textShuffle.js"></script>
     <script>
         $(function () {
-            $('#demo').textShuffle();
+            $('#demo').textShuffle({chars: '1010'});
         });
     </script>
 </head>
