@@ -1,5 +1,9 @@
 $.fn.textShuffle = function (options) {
-    options.bindElement = this;
+    options = $.extend(
+        {bindElement: this},
+        options
+    );
+
     new TextShuffle(options);
     return this;
 };
