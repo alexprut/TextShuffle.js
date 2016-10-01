@@ -4,6 +4,5 @@ $.fn.textShuffle = function (options) {
         options
     );
 
-    new TextShuffle(options);
-    return this;
+    return new TextShuffle(options);
 };

@@ -1,8 +1,9 @@
 var TextShuffle = function (options) {
     var chars = options.chars || "01#/&%$?_-%*";
     var animationSpeed = options.animationSpeed || 10;
-    var bindElements = options.bindElement;
+    var $bindElement = $(options.bindElement);
     var bindEvent = options.bindEvent || "mouseover";
+    var _criticalSection = false;
 
     function getRandomChar() {
         return chars.charAt(
@@ -20,47 +21,50 @@ var TextShuffle = function (options) {
             + string.substr(position + 1, string.length);
     }
 
-    function permString($this, originalText, currentText, counter) {
+    function permString($this, originalText, currentText, counter, callback) {
         counter = counter || 0;
 
-        setTimeout(function ($this, originalText, currentText, counter) {
+        setTimeout(function ($this, originalText, currentText, counter, callback) {
             currentText = changeCharInText(currentText, counter, getRandomChar());
             $this.text(currentText);
 
             // Stop recursion condition
             if (++counter <= originalText.length) {
-                permString($this, originalText, currentText, counter);
+                permString($this, originalText, currentText, counter, callback);
             } else {
-                restoreString($this, originalText, currentText, counter);
+                restoreString($this, originalText, currentText, counter, callback);
             }
-        }, animationSpeed, $this, originalText, currentText, counter);
+        }, animationSpeed, $this, originalText, currentText, counter, callback);
     }
 
-    function restoreString($this, originalText, currentText, counter) {
-        setTimeout(function ($this, originalText, currentText, counter) {
+    function restoreString($this, originalText, currentText, counter, callback) {
+        setTimeout(function ($this, originalText, currentText, counter, callback) {
             currentText = changeCharInText(currentText, counter, originalText.charAt(counter));
             $this.text(currentText);
 
             // Stop recursion condition
             if (--counter >= 0) {
-                restoreString($this, originalText, currentText, counter);
+                restoreString($this, originalText, currentText, counter, callback);
             }
             else {
-                _bindElement($this);
+                callback();
             }
-        }, animationSpeed, $this, originalText, currentText, counter);
+        }, animationSpeed, $this, originalText, currentText, counter, callback);
     }
 
-    function _bind(event, $this) {
-        $this = $this || $(this);
-        var originalText = $this.text();
+    function _permPlay(event) {
+        _criticalSection = true;
+        var originalText = $bindElement.text();
 
-        _unbindElement($this);
-        permString($this, originalText, originalText);
+        _unbindElement($bindElement);
+        permString($bindElement, originalText, originalText, 0, (function () {
+            _bindElement($bindElement);
+            _criticalSection = false;
+        }));
     }
 
     function _bindElement($this) {
-        $this.on(bindEvent, $this, _bind);
+        $this.on(bindEvent, $this, _permPlay);
     }
 
     function _unbindElement($this) {
@@ -68,10 +72,27 @@ var TextShuffle = function (options) {
     }
 
     function _init() {
-        $(bindElements).on(bindEvent, _bind);
+        $bindElement.on(bindEvent, _permPlay);
     }
 
     $(function () {
         _init();
     });
+
+    function play() {
+        if (!_criticalSection) {
+            _criticalSection = true;
+            _unbindElement($bindElement);
+            var originalText = $bindElement.text();
+            permString($bindElement, originalText, originalText, 0, (function () {
+                _bindElement($bindElement);
+                _criticalSection = false;
+                _init
+            }));
+        }
+    }
+
+    return {
+        play: play
+    }
 };

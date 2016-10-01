@@ -4,22 +4,44 @@
     <meta charset="UTF-8">
     <title>TextShuffle.js Demo</title>
     <style>
-        #demo {
+        .demo {
             font-family: monospace;
             padding: 50px;
             font-size: 40px;
+        }
+        button {
+            width: 150px;
+            height: 70px;
+            margin-left: 50px;
+            margin-top: 50px;
+            font-size: 20px;
         }
     </style>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../textShuffle.js"></script>
     <script src="../jquery.textShuffle.js"></script>
     <script>
+        var demos, demoShuffles;
         $(function () {
-            $('#demo').textShuffle({chars: '1010'});
+            demos = $('.demo');
+            demoShuffles = [
+                demos.eq(0).textShuffle({chars: '1010'}),
+                demos.eq(1).textShuffle({chars: '█▓▒░█▓▒░█▓▒░'}),
+                demos.eq(2).textShuffle()
+            ];
+
+            $('button').on('click', function () {
+                for (var i = 0; i < demoShuffles.length; i++) {
+                    demoShuffles[i].play();
+                }
+            })
         });
     </script>
 </head>
 <body>
-    <div id="demo">Hover me to shuffle!</div>
+    <button>Play Demos!</button>
+    <div class="demo">Hover me to shuffle!</div>
+    <div class="demo">Hover me to shuffle!</div>
+    <div class="demo">Hover me to shuffle!</div>
 </body>
 </html>
