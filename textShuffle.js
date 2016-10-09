@@ -54,7 +54,7 @@ var TextShuffle = function (options) {
 
     function _permPlay(event) {
         _criticalSection = true;
-        var originalText = $bindElement.text();
+        var originalText = $.trim($bindElement.text());
 
         _unbindElement($bindElement);
         permString($bindElement, originalText, originalText, 0, (function () {
