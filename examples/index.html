@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>TextShuffle.js Demo</title>
     <style>
-        .demo {
+        .demo, .demo-multiple {
             font-family: monospace;
             padding: 50px;
             font-size: 40px;
@@ -21,7 +21,7 @@
     <script src="../textShuffle.js"></script>
     <script src="../jquery.textShuffle.js"></script>
     <script>
-        var demos, demoShuffles;
+        var demos, demoShuffles, demoShufflesMultiple;
         $(function () {
             demos = $('.demo');
             demoShuffles = [
@@ -30,9 +30,15 @@
                 demos.eq(2).textShuffle()
             ];
 
+            demoShufflesMultiple = $('.demo-multiple').textShuffle({chars: '1010'});
+
             $('button').on('click', function () {
                 for (var i = 0; i < demoShuffles.length; i++) {
                     demoShuffles[i].play();
+                }
+
+                for (var i = 0; i < demoShufflesMultiple.length; i++) {
+                    demoShufflesMultiple[i].play();
                 }
             })
         });
@@ -43,5 +49,8 @@
     <div class="demo">Hover me to shuffle!</div>
     <div class="demo">Hover me to shuffle!</div>
     <div class="demo">Hover me to shuffle!</div>
+    <div class="demo-multiple">Hover me to shuffle!</div>
+    <div class="demo-multiple">Hover me to shuffle!</div>
+    <div class="demo-multiple">Hover me to shuffle!</div>
 </body>
 </html>
