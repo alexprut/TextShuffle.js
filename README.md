@@ -21,4 +21,4 @@ $('#demo').textShuffle({chars: '1010'});
 
 License
 =======
-MIT
+Licensed under [MIT](https://github.com/alexprut/TextShuffle.js/blob/master/LICENSE).
