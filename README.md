@@ -4,23 +4,27 @@ TextShuffle.js
 
 > A jQuery plugin for text shuffling (alike the airport terminal).
 
-####  Demo
-----------
+##  Demo
 ![Demo 1](https://github.com/alexprut/TextShuffle.js/raw/master/examples/demo-randombynary.gif)
 ![Demo 2](https://github.com/alexprut/TextShuffle.js/raw/master/examples/demo-randomchars.gif)
 
-####  Install
--------------
+##  Install
 ```
 bower install textshuffle.js --save
 ```
 
-####  Usage
------------
+##  Usage
 ```javascript
 $('#demo').textShuffle({chars: '1010'});
 ```
 
-####  License
--------------
+#### Parameters
+|Name|Type|Description|Default|
+|----|----|-----------|-------|
+|chars|string|the character to be used during the shuffle|"01#/&%$?\_-%\*"|
+|animationSpeed|int|the animation speed in milliseconds|10|
+|bindEvent|string|the event to bind (e.g. click, mouseenter, mouseleave, ...)|'mouseover'|
+
+
+##  License
 Licensed under [MIT](https://github.com/alexprut/TextShuffle.js/blob/master/LICENSE).
