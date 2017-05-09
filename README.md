@@ -17,14 +17,26 @@ bower install textshuffle.js --save
 ```javascript
 $('#demo').textShuffle({chars: '1010'});
 ```
+or
+```javascript
+var shuffle = $('#demo').textShuffle();
+shuffle.setChars('1010');
+```
 
 #### Parameters
 |Name|Type|Description|Default|
 |----|----|-----------|-------|
-|chars|string|the character to be used during the shuffle|"01#/&%$?\_-%\*"|
-|animationSpeed|int|the animation speed in milliseconds|10|
-|bindEvent|string|the event to bind (e.g. click, mouseenter, mouseleave, ...)|'mouseover'|
+|```chars```|```string```|the character to be used during the shuffle|"01#/&%$?\_-%\*"|
+|```animationSpeed```|```int```|the animation speed in milliseconds|10|
+|```bindEvent```|```string```|the event to bind (e.g. click, mouseenter, mouseleave, ...)|'mouseover'|
 
+
+#### Methods
+|Name|Parameters Type|Description|
+|----|----|-----------|
+|```setChars(newChars)```|```string```|the character to be used during the shuffle|
+|```setAnimationSpeed(newSpeed)```|```int```|the animation speed in milliseconds|
+|```play()```||triggers the shuffle animation|
 
 ##  License
 Licensed under [MIT](https://github.com/alexprut/TextShuffle.js/blob/master/LICENSE).

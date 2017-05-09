@@ -91,7 +91,17 @@ var TextShuffle = function (options) {
     }
   }
 
+  function setChars (newChars) {
+    chars = newChars
+  }
+
+  function setAnimationSpeed (newSpeed) {
+    animationSpeed = newSpeed
+  }
+
   return {
-    play: play
+    play: play,
+    setChars: setChars,
+    setAnimationSpeed: setAnimationSpeed
   }
 }
